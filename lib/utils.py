@@ -22,7 +22,7 @@ def bmesh_to_object(bm, name='Object'):
     bm.free()
 
     obj = bpy.data.objects.new(name, mesh)
-    bpy.context.scene.objects.link(obj)
+    bpy.context.collection.objects.link(obj)
     bpy.context.scene.update()
 
     return obj
@@ -35,7 +35,7 @@ def track_to_constraint(obj, target):
 
 def create_target(origin=(0,0,0)):
     tar = bpy.data.objects.new('Target', None)
-    bpy.context.scene.objects.link(tar)
+    bpy.context.collection.objects.link(tar)
     tar.location = origin
 
     return tar
@@ -53,7 +53,7 @@ def create_camera(origin=(0,0,0), target=None, lens=35, clip_start=0.1, clip_end
     # Link object to scene
     obj = bpy.data.objects.new("CameraObj", camera)
     obj.location = origin
-    bpy.context.scene.objects.link(obj)
+    bpy.context.collection.objects.link(obj)
     bpy.context.scene.camera = obj # Make this the current camera
 
     if target: track_to_constraint(obj, target)
@@ -61,7 +61,7 @@ def create_camera(origin=(0,0,0), target=None, lens=35, clip_start=0.1, clip_end
 
 def create_lamp(origin, type='POINT', energy=1, color=(1,1,1), target=None):
     # Lamp types: 'POINT', 'SUN', 'SPOT', 'HEMI', 'AREA'
-    bpy.ops.object.add(type='LAMP', location=origin)
+    bpy.ops.object.add(type='LIGHT', location=origin)
     obj = bpy.context.object
     obj.data.type = type
     obj.data.energy = energy

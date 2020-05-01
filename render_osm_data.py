@@ -133,7 +133,8 @@ if __name__ == '__main__':
 
 
     # Remove all elements in scene
-    bpy.ops.object.select_by_layer()
+    bpy.ops.object.select_all(action="SELECT")
+    # bpy.ops.object.select_by_layer()
     bpy.ops.object.delete(use_global=False)
 
     # Create scene
@@ -144,11 +145,11 @@ if __name__ == '__main__':
     sun = utils.create_lamp((-5, 5, 10), 'SUN', target=target)
 
     # Set background color
-    bpy.context.scene.world.horizon_color = (0.7, 0.7, 0.7)
+    #bpy.context.scene.world.horizon_color = (0.7, 0.7, 0.7)
 
     # Ambient occlusion
     bpy.context.scene.world.light_settings.use_ambient_occlusion = True
-    bpy.context.scene.world.light_settings.samples = 8
+    #bpy.context.scene.world.light_settings.samples = 8
 
     # Load points from existing geojson file or load them with Overpass API
     filepath = 'data/points_{}_{}_{}.json'.format(iso_a2, tag_key, tag_value)
