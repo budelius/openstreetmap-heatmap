@@ -1,14 +1,11 @@
 import bpy
 import bmesh
 import os
-import sys
 import numpy as np
 from pyproj import Proj
-from mathutils import Matrix, Vector
+from mathutils import Matrix
 from matplotlib import cm
-from bpy.app.handlers import persistent
-import utils
-import utils_osm
+from lib import utils, utils_osm
 from math import sin, cos, pi
 TAU = 2*pi
 
@@ -142,7 +139,7 @@ if __name__ == '__main__':
     # Create scene
     target = utils.create_target(target_position)
     camera = utils.create_camera(camera_position, target=target,
-        camera_type=camera_type, ortho_scale=ortho_scale, lens=28)
+                                 camera_type=camera_type, ortho_scale=ortho_scale, lens=28)
         #type='ORTHO', ortho_scale=12)
     sun = utils.create_lamp((-5, 5, 10), 'SUN', target=target)
 

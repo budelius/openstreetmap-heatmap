@@ -18,7 +18,7 @@ blender -b -P run_script.py
 
 which runs the rendering in the background. You can also load [run_script.py](/run_script.py) into Blender as a script and execute the program from there. You need to have the overpy package available in your Python distribution which is accessed by Blender. I described in this [article](http://til.janakiev.com/using-anaconda-in-blender/) how to use [Anaconda](https://www.anaconda.com/download/) in Blender, which is handy for installing and using additional python packages.
 
-You can edit the settings within the [render_osm_data.py](/render_osm_data.py) under the `# Settings` part. The script can do both render frames of an animation (rotation around the barplot) or render a single frame. You can also load and save the points as a [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) with the [utils_osm.py](/utils_osm.py) script.
+You can edit the settings within the [render_osm_data.py](/render_osm_data.py) under the `# Settings` part. The script can do both render frames of an animation (rotation around the barplot) or render a single frame. You can also load and save the points as a [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) with the [utils_osm.py](/lib/utils_osm.py) script.
 
 # Gallery
 
