@@ -90,7 +90,7 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
                     bar_height / 2))
 
                 S = Matrix.Scale(bar_height / bar_width, 4, (0, 0, 1))
-                bmesh.ops.create_cube(bm, size=bar_width, matrix=T*S)
+                bmesh.ops.create_cube(bm, size=bar_width, matrix=T@S)
 
     objList = []
     for i, bm in enumerate(bmList):
@@ -145,10 +145,12 @@ if __name__ == '__main__':
     sun = utils.create_lamp((-5, 5, 10), 'SUN', target=target)
 
     # Set background color
+    # FIXME
     #bpy.context.scene.world.horizon_color = (0.7, 0.7, 0.7)
 
     # Ambient occlusion
     bpy.context.scene.world.light_settings.use_ambient_occlusion = True
+    # FIXME
     #bpy.context.scene.world.light_settings.samples = 8
 
     # Load points from existing geojson file or load them with Overpass API

@@ -1,7 +1,5 @@
 import os
 import bpy
-import bmesh
-
 
 def simple_material(diffuse_color):
     mat = bpy.data.materials.new('Material')
@@ -23,7 +21,7 @@ def bmesh_to_object(bm, name='Object'):
 
     obj = bpy.data.objects.new(name, mesh)
     bpy.context.collection.objects.link(obj)
-    bpy.context.scene.update()
+    bpy.context.view_layer.update()
 
     return obj
 
