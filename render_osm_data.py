@@ -111,7 +111,9 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
 if __name__ == '__main__':
     # Settings
     #iso_a2, tag_key, tag_value = 'CH', 'amenity', 'bank'
-    iso_a2, tag_key, tag_value = 'AT', 'amenity', 'bank'
+    # man_made=surveillance
+    #iso_a2, tag_key, tag_value = 'AT', 'amenity', 'fuel'
+    iso_a2, tag_key, tag_value = 'AT', 'man_made', 'surveillance'
     #iso_a2, tag_key, tag_value = 'GB', 'amenity', 'pub'
     #res_x, res_y = 768, 432
     #res_x, res_y =  600, 600
@@ -175,9 +177,9 @@ if __name__ == '__main__':
     #hist = heatmap_grid(data, sigma_sq=0.00005, n=80)
     hist = heatmap_grid(data, sigma_sq=0.00002, n=100)
     #heatmap_barplot(hist, colormap=cm.Wistia)
-    heatmap_barplot(hist, colormap=cm.viridis)
+    #heatmap_barplot(hist, colormap=cm.viridis)
     #heatmap_barplot(hist, colormap=cm.YlGn_r)
-    #heatmap_barplot(hist, colormap=cm.summer_r)
+    heatmap_barplot(hist, colormap=cm.summer_r)
 
     # Animate rotation of camera
     if animation:
