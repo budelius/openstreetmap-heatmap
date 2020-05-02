@@ -99,7 +99,7 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
 
         # Create material with colormap
         color = colormap(i / num_colors)
-        mat = utils.simple_material(color[:3])
+        mat = utils.simple_material(color[:4])
         obj.data.materials.append(mat)
         objList.append(obj)
 
@@ -110,7 +110,9 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
 
 if __name__ == '__main__':
     # Settings
-    iso_a2, tag_key, tag_value = 'GB', 'amenity', 'pub'
+    #iso_a2, tag_key, tag_value = 'CH', 'amenity', 'bank'
+    iso_a2, tag_key, tag_value = 'AT', 'amenity', 'bank'
+    #iso_a2, tag_key, tag_value = 'GB', 'amenity', 'pub'
     #res_x, res_y = 768, 432
     #res_x, res_y =  600, 600
     #res_x, res_y =  640, 480
@@ -123,9 +125,9 @@ if __name__ == '__main__':
     num_frames = 40
 
     #camera_position, target_position = (3, -10, 8), (0.3, -1.8, 0.5)  # DE
-    #camera_position, target_position = (3, -10, 8), (0.3, 0.0, 0.5)  # AT
+    camera_position, target_position = (3, -10, 8), (0.3, 0.0, 0.5)  # AT
     #camera_position, target_position = (3, -10, 8), (-0.1, -0.4, 1.0)  # CH
-    camera_position, target_position = (-2, -10, 8), (0.0, -2.6, 1.0)  # GB
+    #camera_position, target_position = (-2, -10, 8), (0.0, -2.6, 1.0)  # GB
 
     #camera_type, ortho_scale = 'ORTHO', 15
     camera_type, ortho_scale = 'PERSP', 18
@@ -145,8 +147,7 @@ if __name__ == '__main__':
     sun = utils.create_lamp((-5, 5, 10), 'SUN', target=target)
 
     # Set background color
-    # FIXME
-    #bpy.context.scene.world.horizon_color = (0.7, 0.7, 0.7)
+    bpy.context.scene.world.color = (0.7, 0.7, 0.7)
 
     # Ambient occlusion
     bpy.context.scene.world.light_settings.use_ambient_occlusion = True

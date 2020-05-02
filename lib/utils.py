@@ -5,12 +5,12 @@ def simple_material(diffuse_color):
     mat = bpy.data.materials.new('Material')
 
     # Diffuse
-    mat.diffuse_shader = 'LAMBERT'
-    mat.diffuse_intensity = 0.9
+    # mat.diffuse_shader = 'LAMBERT'
+    # mat.diffuse_intensity = 0.9
     mat.diffuse_color = diffuse_color
 
     # Specular
-    mat.specular_intensity = 0
+    # mat.specular_intensity = 0
 
     return mat
 
