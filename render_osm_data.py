@@ -112,8 +112,9 @@ if __name__ == '__main__':
     # Settings
     #iso_a2, tag_key, tag_value = 'CH', 'amenity', 'bank'
     # man_made=surveillance
-    #iso_a2, tag_key, tag_value = 'AT', 'amenity', 'fuel'
-    iso_a2, tag_key, tag_value = 'AT', 'man_made', 'surveillance'
+    # iso_a2, tag_key, tag_value = 'AT', 'amenity', 'fuel'
+    # iso_a2, tag_key, tag_value = 'AT', 'man_made', 'surveillance'
+    iso_a2, tag_key, tag_value = 'US', 'man_made', 'surveillance'
     #iso_a2, tag_key, tag_value = 'GB', 'amenity', 'pub'
     #res_x, res_y = 768, 432
     #res_x, res_y =  600, 600
