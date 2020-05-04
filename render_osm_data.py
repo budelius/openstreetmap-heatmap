@@ -100,7 +100,9 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
         # Create material with colormap
         color = colormap(i / num_colors)
         mat = utils.simple_material(color[:4])
-        obj.data.materials.append(mat)
+        #obj.data.materials.append(mat)
+        obj.active_material = mat
+
         objList.append(obj)
 
         # Add bevel modifier
@@ -114,7 +116,9 @@ if __name__ == '__main__':
     # man_made=surveillance
     # iso_a2, tag_key, tag_value = 'AT', 'amenity', 'fuel'
     # iso_a2, tag_key, tag_value = 'AT', 'man_made', 'surveillance'
-    iso_a2, tag_key, tag_value = 'US', 'man_made', 'surveillance'
+    # iso_a2, tag_key, tag_value = 'US', 'amenity', 'hospital'
+    # iso_a2, tag_key, tag_value = 'US', 'amenity', 'bank'
+    iso_a2, tag_key, tag_value = 'US', 'shop', 'weapons'
     #iso_a2, tag_key, tag_value = 'GB', 'amenity', 'pub'
     #res_x, res_y = 768, 432
     #res_x, res_y =  600, 600
@@ -179,8 +183,8 @@ if __name__ == '__main__':
     hist = heatmap_grid(data, sigma_sq=0.00002, n=100)
     #heatmap_barplot(hist, colormap=cm.Wistia)
     #heatmap_barplot(hist, colormap=cm.viridis)
-    #heatmap_barplot(hist, colormap=cm.YlGn_r)
-    heatmap_barplot(hist, colormap=cm.summer_r)
+    heatmap_barplot(hist, colormap=cm.YlGn_r)
+    #heatmap_barplot(hist, colormap=cm.summer_r)
 
     # Animate rotation of camera
     if animation:
@@ -200,3 +204,5 @@ if __name__ == '__main__':
 
     # Render result
     utils.render_to_folder(render_folder, render_name, res_x=res_x, res_y=res_y, animation=animation, frame_end=num_frames, render_opengl=False)
+
+    bpy.ops.wm.save_as_mainfile(filepath="T:/projects/pseekoo/openstreetmap-heatmap/test.blend")

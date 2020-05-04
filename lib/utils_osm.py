@@ -7,13 +7,12 @@ def overpass_load_points(iso_a2, tag_key='amenity', tag_value='cafe'):
 
     api = overpy.Overpass()
     r = api.query("""
+        [out:json][timeout:1200];
         ( area["ISO3166-1"="{0}"][admin_level=2]; )->.searchArea;
-
         ( node[{1}={2}]( area.searchArea );
           way[{1}={2}]( area.searchArea );
           relation[{1}={2}]( area.searchArea );
         );
-
         out center;""".format(iso_a2, tag_key, tag_value))
 
     print("Nodes : {}, Ways : {}, Relations : {}".format(

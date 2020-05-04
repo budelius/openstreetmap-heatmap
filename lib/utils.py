@@ -2,14 +2,21 @@ import os
 import bpy
 
 def simple_material(diffuse_color):
-    mat = bpy.data.materials.new('Material')
+
+    mat = bpy.data.materials.get('Material')
+    if mat is None:
+        mat = bpy.data.materials.new('Material')
 
     # Diffuse
     # mat.diffuse_shader = 'LAMBERT'
     # mat.diffuse_intensity = 0.9
     mat.diffuse_color = diffuse_color
 
-    # Specular
+    principled_bsdf = mat.node_tree.nodes.get('Principled BSDF')
+    if principled_bsdf is not None:
+        principled_bsdf.inputs[0].default_value = (255, 0, 0, 0.9)
+
+        # Specular
     # mat.specular_intensity = 0
 
     return mat
