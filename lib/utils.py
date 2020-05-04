@@ -1,22 +1,33 @@
 import os
 import bpy
 
-def simple_material(diffuse_color):
+def simple_material(diffuse_color, index=0):
 
-    mat = bpy.data.materials.get('Material')
+    materialName = 'Material ' + str(index)
+    mat = bpy.data.materials.get(materialName)
     if mat is None:
-        mat = bpy.data.materials.new('Material')
+        mat = bpy.data.materials.new(materialName)
+        mat.use_nodes = True
 
     # Diffuse
     # mat.diffuse_shader = 'LAMBERT'
     # mat.diffuse_intensity = 0.9
-    mat.diffuse_color = diffuse_color
 
-    principled_bsdf = mat.node_tree.nodes.get('Principled BSDF')
-    if principled_bsdf is not None:
-        principled_bsdf.inputs[0].default_value = (255, 0, 0, 0.9)
+    node_tree = mat.node_tree
+    nodes = node_tree.nodes
 
-        # Specular
+    bsdf = nodes.get('Principled BSDF')
+    if bsdf is not None:
+        bsdf.inputs[0].default_value = diffuse_color # (255, 0, 0, 0.9)
+
+    #vcol = nodes.new(type="ShaderNodeVertexColor")
+    #vcol.layer_name = "VColor " + str(index)  # the vertex color layer name
+
+    # make links
+
+    #node_tree.links.new(vcol.outputs[0], bsdf.inputs[0])
+
+    # Specular
     # mat.specular_intensity = 0
 
     return mat

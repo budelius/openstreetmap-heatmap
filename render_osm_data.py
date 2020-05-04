@@ -99,8 +99,8 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
 
         # Create material with colormap
         color = colormap(i / num_colors)
-        mat = utils.simple_material(color[:4])
-        #obj.data.materials.append(mat)
+
+        mat = utils.simple_material(color[:4], i)
         obj.active_material = mat
 
         objList.append(obj)
@@ -108,7 +108,6 @@ def heatmap_barplot(grid, h=4, width=10, bar_scale=0.9, num_colors=10, colormap=
         # Add bevel modifier
         bevel = obj.modifiers.new('Bevel', 'BEVEL')
         bevel.width = bevel_width
-
 
 if __name__ == '__main__':
     # Settings
@@ -154,7 +153,7 @@ if __name__ == '__main__':
     sun = utils.create_lamp((-5, 5, 10), 'SUN', target=target)
 
     # Set background color
-    bpy.context.scene.world.color = (0.7, 0.7, 0.7)
+    bpy.context.scene.world.color = (0.7, 0.8, 0.9)
 
     # Ambient occlusion
     bpy.context.scene.world.light_settings.use_ambient_occlusion = True
@@ -205,4 +204,5 @@ if __name__ == '__main__':
     # Render result
     utils.render_to_folder(render_folder, render_name, res_x=res_x, res_y=res_y, animation=animation, frame_end=num_frames, render_opengl=False)
 
+    # save as blender file
     bpy.ops.wm.save_as_mainfile(filepath="T:/projects/pseekoo/openstreetmap-heatmap/test.blend")
