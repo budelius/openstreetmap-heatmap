@@ -123,7 +123,8 @@ if __name__ == '__main__':
     #res_x, res_y =  600, 600
     #res_x, res_y =  640, 480
     #res_x, res_y =  640, 360
-    res_x, res_y = 1280, 720
+    #res_x, res_y = 1280, 720
+    res_x, res_y = 1920, 1080
 
     animation = False
     #r, camera_z = 10, 7
@@ -131,14 +132,14 @@ if __name__ == '__main__':
     num_frames = 40
 
     #camera_position, target_position = (3, -10, 8), (0.3, -1.8, 0.5)  # DE
-    camera_position, target_position = (3, -10, 8), (0.3, 0.0, 0.5)  # AT
+    #camera_position, target_position = (3, -10, 8), (0.3, 0.0, 0.5)  # AT
     #camera_position, target_position = (3, -10, 8), (-0.1, -0.4, 1.0)  # CH
     #camera_position, target_position = (-2, -10, 8), (0.0, -2.6, 1.0)  # GB
+    camera_position, target_position = (-4, -8, 10), (0.0, -2.6, 1.0)  # US
 
     #camera_type, ortho_scale = 'ORTHO', 15
     camera_type, ortho_scale = 'PERSP', 18
     render_idx = 0
-
 
     # Remove all elements in scene
     bpy.ops.object.select_all(action="SELECT")
@@ -149,14 +150,26 @@ if __name__ == '__main__':
     target = utils.create_target(target_position)
     camera = utils.create_camera(camera_position, target=target,
                                  camera_type=camera_type, ortho_scale=ortho_scale, lens=28)
-        #type='ORTHO', ortho_scale=12)
+    #type='ORTHO', ortho_scale=12)
     sun = utils.create_lamp((-5, 5, 10), 'SUN', target=target)
 
-    # Set background color
-    bpy.context.scene.world.color = (0.7, 0.8, 0.9)
+    scene = bpy.context.scene
+
+    scene.render.engine = 'CYCLES'
+
+    world = scene.world
+
+    world.use_nodes = True
+
+    bg = world.node_tree.nodes['Background']
+
+    bg.inputs[0].default_value[:3] = (0.7, 0.7, 0.7)
+    bg.inputs[1].default_value = 1.0
+
+    # bpy.context.scene.render.film_transparent = True
 
     # Ambient occlusion
-    bpy.context.scene.world.light_settings.use_ambient_occlusion = True
+    scene.world.light_settings.use_ambient_occlusion = True
     # FIXME
     #bpy.context.scene.world.light_settings.samples = 8
 
@@ -181,8 +194,8 @@ if __name__ == '__main__':
     #hist = heatmap_grid(data, sigma_sq=0.00005, n=80)
     hist = heatmap_grid(data, sigma_sq=0.00002, n=100)
     #heatmap_barplot(hist, colormap=cm.Wistia)
-    #heatmap_barplot(hist, colormap=cm.viridis)
-    heatmap_barplot(hist, colormap=cm.YlGn_r)
+    heatmap_barplot(hist, colormap=cm.viridis)
+    #heatmap_barplot(hist, colormap=cm.YlGn_r)
     #heatmap_barplot(hist, colormap=cm.summer_r)
 
     # Animate rotation of camera
@@ -205,4 +218,7 @@ if __name__ == '__main__':
     utils.render_to_folder(render_folder, render_name, res_x=res_x, res_y=res_y, animation=animation, frame_end=num_frames, render_opengl=False)
 
     # save as blender file
-    bpy.ops.wm.save_as_mainfile(filepath="T:/projects/pseekoo/openstreetmap-heatmap/test.blend")
+    path = os.path.join(os.getcwd(), 'test.blend')
+    if os.path.exists(path):
+        os.remove(path)
+    bpy.ops.wm.save_as_mainfile(filepath=path)
